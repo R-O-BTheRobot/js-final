@@ -1,7 +1,7 @@
 //zadeklarowanie typu
 type ImageProps = {
     imageSrc: string;
-    imageAlt?: string;//albo bedzie string jesli cos przekaze albo underfind jesli nic nie przekaze
+    imageAlt?: string;//albo bedzie string jesli cos przekaze albo underfind jesli nic nie przekze
 }
 
 //ImageProps to jest zadeklarowanie typu który sobie sami skonstuujemy

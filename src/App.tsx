@@ -1,11 +1,7 @@
-//import { useState } from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
-import { Routes, Route } from "react-router-dom";
-import './App.css';
-import ProductDetails from './pages/ProductDetails';
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import ProductList from './pages/ProductList';
 import Layout from './components/Layout';
+import './assets/styles/App.css'
 
 // type ImageType = {
 //     src: string;
@@ -38,17 +34,23 @@ function App() {
     //     { src: 'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-10.jpg' },
     // ];
     return (
-        <Routes>
-            {/* to na dole to jest layout*/}
-            <Route path="/" element={<Layout />}>
-                {/* na dole jest nasza strona główna. Nasz indeks */}
-                <Route index element={<ProductList />} />
-                <Route path="product" element={<ProductDetails />} />
-                <Route path="*" element={<div> nie ma strony</div>} />
+        <BrowserRouter>
+            <Routes>
+                {/* to na dole to jest layout*/}
+                <Route path="/" element={
+                    <Layout>
+                        <ProductList />
+                    </Layout>
+                }>
+                <Route path="products" element={<ProductList />} />
+                    {/* na dole jest nasza strona główna. Nasz indeks */}
+                    {/* <Route path="product" element={<ProductList />} /> */}
                 {/* jesli nie znajdzie adnej z powyzszych wywali 404 */}
-            </Route>
-        </Routes>
-    )
+                <Route path="*" element={<div> nie ma strony</div>} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
-export default App
+export default App;
