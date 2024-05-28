@@ -1,7 +1,8 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import ProductList from './pages/ProductList';
+import ProductDetails from './pages/ProductDetails';
 import Layout from './components/Layout';
-import './assets/styles/App.css'
+import './App.css';
 
 // type ImageType = {
 //     src: string;
@@ -35,20 +36,18 @@ function App() {
     // ];
     return (
         <BrowserRouter>
-            <Routes>
-                {/* to na dole to jest layout*/}
-                <Route path="/" element={
-                    <Layout>
-                        <ProductList />
-                    </Layout>
-                }>
-                <Route path="products" element={<ProductList />} />
-                    {/* na dole jest nasza strona główna. Nasz indeks */}
-                    {/* <Route path="product" element={<ProductList />} /> */}
-                {/* jesli nie znajdzie adnej z powyzszych wywali 404 */}
-                <Route path="*" element={<div> nie ma strony</div>} />
-                </Route>
-            </Routes>
+            <Layout>
+                <Routes>
+                    {/* to na dole to jest layout*/}
+                    <Route path="/" element={<ProductList />}/>
+                    {/* :id - nawa parametru, przechwyytujemy przy pomocy useParams() */}
+                    {<Route path="products/:id" element={<ProductDetails />} />/*  */}
+                        {/* na dole jest nasza strona główna. Nasz indeks */}
+                        {/* <Route path="product" element={<ProductList />} /> */}
+                    {/* jesli nie znajdzie adnej z powyzszych wywali 404 */}
+                    <Route path="*" element={<div> nie ma strony</div>} />
+                </Routes>
+            </Layout>
         </BrowserRouter>
     );
 }

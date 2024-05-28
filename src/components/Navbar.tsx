@@ -1,14 +1,32 @@
 import Link from "./Link";
+// import { useLocalStorage } from "@uidotdev/usehooks";
+// import { useEffect } from "react";
+
 function toggleDark():void {
     const body = document.querySelector('body')!;
     body.classList.toggle("dark");
 }
 export default () => {
+    // const [darkMode, saveDarkMode] = useLocalStorage("isDarkModeEnabled", false);//domyślnie bedzie wyłączony tryb gdy wchodzimy pierwszy raz na stronę
+
+    // useEffect(() => {
+    //     const body = document.querySelector('body')!;
+    //     if(darkMode) {
+    //         body.classList.add("dark");
+    //     } else {
+    //         body.classList.remove("dark");
+    //     }
+    // }, [darkMode]);
+
+    // const toggleDark = () => {
+    //     saveDarkMode(!darkMode);
+    // }
+   
     return (
         <nav className="sticky top-0 right-0 left-0 bg-white dark:bg-slate-900 dark:border-gray-200 text-black dark:text-gray-300 border-gray-200">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
+            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-8">
                 <div className="p-2">
-                    <a className="self-center text-2xl whitespace-nowrap" href={'./'}>Working Title</a>
+                    <a className="self-center text-2xl whitespace-nowrap" href={'/'}>Strona Główna</a>
                 </div>
                 <div className="flex items-center space-x-3">
                     <button id="theme-toggle" type="button" onClick={toggleDark} className="hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
@@ -27,9 +45,9 @@ export default () => {
                                 d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/>
                         </svg>
                     </button>
-                    <Link path={"./products"} name={"Produkty"}/>
+                    {/* <Link path={"./products"} name={"Produkty"}/>
                     <Link path={"./two"} name={"Two"}/>
-                    <Link path={"./three"} name={"Three"}/>
+                    <Link path={"./three"} name={"Three"}/> */}
                 </div>
             </div>
         </nav>

@@ -20,16 +20,18 @@ export default () => {
     }, [products]);//jakie wartości będą nasłuchiwane
 
     return (
-      
             <div className='flex justify-center'>
                 <div className="relative grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 max-w-screen-xl gap-4 p-2">
                 {
                     products?.map((product: any) =>
-                        <Image 
-                            key={product.id}
-                            imageSrc={product.images[0]}
-                            imageAlt={product.title}
-                        />
+                        // Opakowujemy komponent Image tagiem <a>, aby stał się linkiem i w adresie url doklejał ID produktu. Cała strona zostanie przładowana
+                        <a href={'/products/' + product.id}>
+                            <Image 
+                                key={product.id}
+                                imageSrc={product.images[0]}
+                                imageAlt={product.title}
+                            />
+                        </a>
                     )
                 }
                 {console.log(products)}
