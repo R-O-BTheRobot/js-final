@@ -1,8 +1,9 @@
 import Link from "./Link";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { useEffect, useState} from "react";
-import PopupBtn from "./PupupBtn.tsx";
+import PopupBtn from "./PopupBtn.tsx";
 import Popup from "./Popup.tsx";
+import UploadPopup from "./UploadPopup.tsx";
 
 export default function Navbar() {
     const [darkMode, saveDarkMode] = useLocalStorage("isDarkModeEnabled", false);//domyślnie bedzie wyłączony tryb gdy wchodzimy pierwszy raz na stronę
@@ -56,7 +57,9 @@ export default function Navbar() {
                     </div>
                 </div>
             </nav>
-            <Popup popupState={popupState} onClick={toggleUpload()}/>
+            <Popup popupState={popupState} onClick={toggleUpload()}>
+                <UploadPopup onClick={toggleUpload()}/>
+            </Popup>
         </>
     )
 }
