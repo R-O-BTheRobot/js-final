@@ -5,10 +5,13 @@ import ProductDetails from './pages/ProductDetails';
 import './App.css';
 import Navbar from "./components/Navbar.tsx";
 
-// type ImageType = {
-//     src: string;
-//     alt?: string;
-// }
+interface IImage {
+    _id: string,
+    userId: string,
+    title: string,
+    imageBase64: string,
+    description: string|undefined
+}
 
 function App() {
     //const [count, setCount] = useState(0)
@@ -20,7 +23,7 @@ function App() {
                 {/* to na dole to jest layout*/}
                 <Route path="/" element={<ProductList />}/>
                 {/* :id - nawa parametru, przechwyytujemy przy pomocy useParams() */}
-                {<Route path="products/:id" element={<ProductDetails />} />/*  */}
+                {<Route path="/image/:id" element={<ProductDetails />} />/*  */}
                     {/* na dole jest nasza strona główna. Nasz indeks */}
                     {/* <Route path="product" element={<ProductList />} /> */}
                 <Route path="/upload" element={<ProductList />}/>

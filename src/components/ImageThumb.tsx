@@ -5,11 +5,11 @@ type ImageProps = {
 }
 
 //ImageProps to jest zadeklarowanie typu który sobie sami skonstuujemy
-export default ({ imageSrc, imageAlt }: ImageProps) => (
-    <div>
-        <img className="h-auto max-w-full rounded-lg"
-            src={imageSrc} alt={imageAlt} />
+export default function ImageThumb({ imageSrc, imageAlt }: ImageProps) {return(
+    <div className={"flex justify-center items-center w-72 h-72 overflow-hidden rounded-lg"}>
+        <img className="max-w-full"
+             src={imageSrc} alt={imageAlt}/>
     </div>
-)//robimy dynamiczny komponent
+)}//robimy dynamiczny komponent
 
 // props.imageSrc; Wypakowujemy więc bierzemy { imageSrc }. To jest taka zajebista właściwość 

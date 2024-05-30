@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import Image from "../components/Image";
+import ImageThumb from "../components/ImageThumb.tsx";
 
-
-export default () => {
+export default function ProductList() {
     //logika nizej
 
-    const [products, setProducts] = useState<any>(); //getter and setter / pobieram i ustawiem
+    const [products, setProducts] = useState<IImage>(); //getter and setter / pobieram i ustawiem
     //wykonywany gdy ten komponent (ten plik na którym jesteśmy) zostanie wyswietlony na strony czyli zainicjalizowany lub zmieni się jakaś wartość w useState i use Effect to są Hooki()
     useEffect(() => {
         if (products === undefined) {
@@ -24,10 +23,10 @@ export default () => {
             <div className='flex justify-center'>
                 <div className="relative grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 max-w-screen-xl gap-4 p-2">
                 {
-                    products?.map((product: any) =>
+                    products?.map((product: IImage) =>
                         // Opakowujemy komponent Image tagiem <a>, aby stał się linkiem i w adresie url doklejał ID produktu. Cała strona zostanie przładowana
-                        <a href={'/products/' + product._id}>
-                            <Image 
+                        <a href={'/image/' + product._id}>
+                            <ImageThumb
                                 key={product._id}
                                 imageSrc={product.imageBase64}
                                 imageAlt={product.title}

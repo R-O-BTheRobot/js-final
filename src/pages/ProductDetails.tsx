@@ -1,39 +1,40 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Image from "../components/Image";
+import ImageFull from "../components/ImageFull";
 
-export default () => {
+export default function ProductDetails()  {
     const { id } = useParams();
 
-    const [product, setProduct] = useState<any>(); //getter and setter / pobieram i ustawiem
+    const [image, setImage] = useState<IImage>(); //getter and setter / pobieram i ustawiem
     //wykonywany gdy ten komponent (ten plik na którym jesteśmy) zostanie wyswietlony na strony czyli zainicjalizowany lub zmieni się jakaś wartość w useState i use Effect to są Hooki()
     useEffect(() => {
-        if (product === undefined) {
+        if (image === undefined) {
             fetch('http://localhost:3000/api/image/' + id)
                 .then(res => res.json())
 
                 .then((res) => {
-                    setProduct(res); //zapisujemy w zmiennej product. Zwróci tablice tylko z product z backend
+                    setImage(res); //zapisujemy w zmiennej image. Zwróci tablice tylko z image z backend
                     console.log(res)
                 });
         }
-    }, [product]);//jakie wartości będą nasłuchiwane
+    }, [image]);//jakie wartości będą nasłuchiwane
 
-    if(product === undefined) {
+    if(image === undefined) {
         return (
             <p>Brak danych</p>
         );
     }
 
     return (
-        <div className='flex justify-center'>
+        <div className='flex justify-center p-2'>
 
-            <Image
-                key={product._id}
-                imageSrc={product.imageBase64}
-                imageAlt={product.title}
+            <ImageFull
+                key={image._id}
+                imageSrc={image.imageBase64}
+                title={image.title}
+                description={image.description}
             />
-            {/* <Image imageSrc={product.images[0]} imageAlt={product.category} /> */}
+            {/* <Image imageSrc={image.images[0]} imageAlt={image.category} /> */}
 
         </div>
     )

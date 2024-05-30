@@ -4,7 +4,7 @@ import { useEffect, useState} from "react";
 import PopupBtn from "./PupupBtn.tsx";
 import Popup from "./Popup.tsx";
 
-export default () => {
+export default function Navbar() {
     const [darkMode, saveDarkMode] = useLocalStorage("isDarkModeEnabled", false);//domyślnie bedzie wyłączony tryb gdy wchodzimy pierwszy raz na stronę
     const [popupState, setPopupState] = useState({ open: false });
 
@@ -49,7 +49,8 @@ export default () => {
                             </svg>
                         </button>
                         <PopupBtn onClick={toggleUpload()} name={"Dodaj zdjęcie"}/>
-                        {/* <Link path={"./products"} name={"Produkty"}/>
+                        <Link path={"./login"} name={"Logowanie"}/>
+                        {/*
                         <Link path={"./two"} name={"Two"}/>
                         <Link path={"./three"} name={"Three"}/> */}
                     </div>
