@@ -1,5 +1,5 @@
 /* import Image from "./ImageThumb.tsx"; */
-import {useState} from "react";
+import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 export default function UploadPopup({onClick}: {onClick:()=>void}) {
@@ -68,16 +68,18 @@ export default function UploadPopup({onClick}: {onClick:()=>void}) {
         </div>;
     }
 
-    function handleSubmit(event){
+    function handleSubmit(event:FormEvent){
         event.preventDefault();
+        const id = Date.now()
         const imageBase64 = (document.querySelector('#imageBase64') as HTMLInputElement).value;
         const userId = (document.querySelector('#userId') as HTMLInputElement).value;
         const description = (document.querySelector('#description') as HTMLInputElement).value;
         const title = (document.querySelector('#title') as HTMLInputElement).value;
         fetch('http://localhost:3000/api/upload', {
-            method: 'post',
+            method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
+                "id": id,
                 "imageBase64": imageBase64,
                 "userId": userId,
                 "description": description,

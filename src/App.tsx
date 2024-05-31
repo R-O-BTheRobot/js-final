@@ -5,16 +5,7 @@ import ProductDetails from './pages/ProductDetails';
 import './App.css';
 import Navbar from "./components/Navbar.tsx";
 
-interface IImage {
-    _id: string,
-    userId: string,
-    title: string,
-    imageBase64: string,
-    description: string|undefined
-}
-
 function App() {
-    //const [count, setCount] = useState(0)
     document.body.classList.add('bg-gray-100', 'dark:bg-slate-700');
     return (
         <BrowserRouter>

@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import ImageThumb from "../components/ImageThumb.tsx";
 
 export default function ProductList() {
-    //logika nizej
+    interface IImage {
+        _id: string,
+        userId: string,
+        title: string,
+        imageBase64: string,
+        description: string|undefined
+    }
 
     const [products, setProducts] = useState<IImage>(); //getter and setter / pobieram i ustawiem
     //wykonywany gdy ten komponent (ten plik na którym jesteśmy) zostanie wyswietlony na strony czyli zainicjalizowany lub zmieni się jakaś wartość w useState i use Effect to są Hooki()
@@ -34,7 +40,9 @@ export default function ProductList() {
                         </a>
                     )
                 }
-                {console.log(products)}
+                {
+                    //console.log(products)
+                }
                 </div>
             </div>
        

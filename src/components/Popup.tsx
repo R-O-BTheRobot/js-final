@@ -1,4 +1,7 @@
-export default function Popup({children, popupState, onClick}: {children: ReactNode, popupState:{open:boolean}, onClick:()=>void}) {
+import {ReactNode} from "react";
+
+export default function Popup({popupState, onClick, children}:{popupState:{open:boolean}, onClick:()=>void, children: ReactNode|undefined}) {
+    console.log('popupState is '+popupState.open);
     if (popupState.open) return (
         <>
             <div className="h-screen w-screen bg-slate-700 opacity-50 absolute top-0 left-0 z-10" onClick={() => {
