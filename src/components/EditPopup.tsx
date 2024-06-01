@@ -10,8 +10,8 @@ export default function EditPopup({onClick}: {onClick:()=>void}) {
         const id = window.location.pathname.split('/').slice(-1)[0];
         const description = (document.querySelector('#description') as HTMLInputElement).value;
         const title = (document.querySelector('#title') as HTMLInputElement).value;
-        fetch('http://localhost:3000/api/upload', {
-            method: 'patch',
+        fetch('http://localhost:3000/api/update', {
+            method: 'PATCH',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 "id": id,
@@ -20,10 +20,22 @@ export default function EditPopup({onClick}: {onClick:()=>void}) {
             })
         })
             .then(response => response.json())
-            .then((id) => {
-                console.log(id);
+            .then((res) => {
                 onClick();
-                navigate("/image/"+id, );
+                if(!res.errorResponse){
+                    console.debug(id);
+                    window.location.reload();
+                }
+                else{
+                    console.log('Wystąpił błąd!');
+                    console.error(res);
+                    navigate("/error/"+res.errorResponse.errorMessage);
+                }
+            }).catch((res)=>{
+                console.log('Wystąpił błąd!');
+                console.error(res);
+                onClick();
+                navigate("/error/"+"Błąd serwera");
             });
     }
 

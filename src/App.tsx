@@ -4,6 +4,7 @@ import ProductDetails from './pages/ProductDetails';
 //import Layout from './components/Layout';
 import './App.css';
 import Navbar from "./components/Navbar.tsx";
+import Error from "./components/Error.tsx";
 
 function App() {
     document.body.classList.add('bg-gray-100', 'dark:bg-slate-700');
@@ -19,7 +20,8 @@ function App() {
                     {/* <Route path="product" element={<ProductList />} /> */}
                 <Route path="/upload" element={<ProductList />}/>
                 {/* jesli nie znajdzie adnej z powyzszych wywali 404 */}
-                <Route path="*" element={<div> nie ma strony</div>} />
+                <Route path="/error/:msg" element={<Error/>} />
+                <Route path="*" element={<Error errorMsg={"Nie ma takiej strony"}/>} />
             </Routes>
         </BrowserRouter>
     );

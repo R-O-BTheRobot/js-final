@@ -9,7 +9,7 @@ export default function DeletePopup({onClick}: {onClick:()=>void}) {
     function handleSubmit(event : FormEvent){
         event.preventDefault();
         const id = window.location.pathname.split('/').slice(-1)[0];
-        fetch('http://localhost:3000/api/upload', {
+        fetch('http://localhost:3000/api/delete', {
             method: 'delete',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -17,10 +17,22 @@ export default function DeletePopup({onClick}: {onClick:()=>void}) {
             })
         })
             .then(response => response.json())
-            .then((id) => {
-                console.log(id);
+            .then((res) => {
                 onClick();
-                navigate("/");
+                if(!res.errorResponse){
+                    console.debug(id);
+                    navigate("/");
+                }
+                else{
+                    console.log('Wystąpił błąd!');
+                    console.error(res);
+                    navigate("/error/"+res.errorResponse.errorMessage);
+                }
+            }).catch((res)=>{
+                console.log('Wystąpił błąd!');
+                console.error(res);
+                onClick();
+                navigate("/error/"+"Błąd serwera");
             });
     }
 

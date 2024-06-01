@@ -17,21 +17,23 @@ export default function ImageFull({ imageSrc, title, description }: ImageProps) 
 
     function toggleUpload(mode?: string) {
         if(mode === undefined) mode = '';
-        console.log(editDeletePopupState.open);
-        console.log(!editDeletePopupState.open);
-        return () => {
-            setEditDeletePopupState({ open: !editDeletePopupState.open });
-            setEditDeletePopupMode({ mode: mode});
-        };
+        console.debug(editDeletePopupState.open);
+        console.debug(!editDeletePopupState.open);
+        setEditDeletePopupState({ open: !editDeletePopupState.open});
+        setEditDeletePopupMode({ mode: mode});
+        return;
+        /*return () => {
+
+        };*/
     }
 
     return(
     <>
-        <Popup popupState={editDeletePopupState} onClick={toggleUpload()}>
+        <Popup popupState={editDeletePopupState} onClick={toggleUpload}>
             {editDeletePopupMode.mode == 'edit' ?
-                <EditPopup onClick={toggleUpload()}></EditPopup>
+                <EditPopup onClick={toggleUpload}></EditPopup>
             :
-                <DeletePopup onClick={toggleUpload()}></DeletePopup>
+                <DeletePopup onClick={toggleUpload}></DeletePopup>
             }
         </Popup>
 
@@ -55,12 +57,12 @@ export default function ImageFull({ imageSrc, title, description }: ImageProps) 
             <div className={"p-10"}>
                 <button type="button"
                         className={"text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"}
-                        onClick={toggleUpload('edit')}>
+                        onClick={()=>{toggleUpload('edit')}}>
                     Edytuj
                 </button>
                 <button type="button"
                         className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                        onClick={toggleUpload('delete')}>
+                        onClick={()=>{toggleUpload('delete')}}>
                     Usuń
                 </button>
             </div>

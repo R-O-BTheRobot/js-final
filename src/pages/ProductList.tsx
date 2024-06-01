@@ -3,7 +3,7 @@ import ImageThumb from "../components/ImageThumb.tsx";
 
 export default function ProductList() {
     interface IImage {
-        _id: string,
+        id: string,
         userId: string,
         title: string,
         imageBase64: string,
@@ -18,7 +18,7 @@ export default function ProductList() {
                 .then(res => res.json())
 
                 .then((res) => {
-                    console.log(res)
+                    console.debug(res)
                     setProducts(res); //zapisujemy w zmiennej products. Zwróci tablice tylko z product z backend
 
                 });
@@ -31,9 +31,8 @@ export default function ProductList() {
                 {
                     products?.map((product: IImage) =>
                         // Opakowujemy komponent Image tagiem <a>, aby stał się linkiem i w adresie url doklejał ID produktu. Cała strona zostanie przładowana
-                        <a href={'/image/' + product._id}>
+                        <a href={'/image/' + product.id} key={product.id}>
                             <ImageThumb
-                                key={product._id}
                                 imageSrc={product.imageBase64}
                                 imageAlt={product.title}
                             />
@@ -41,7 +40,7 @@ export default function ProductList() {
                     )
                 }
                 {
-                    //console.log(products)
+                    //console.debug(products)
                 }
                 </div>
             </div>
