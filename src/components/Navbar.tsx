@@ -51,6 +51,7 @@ export default function Navbar() {
                         </button>
                         <PopupButton onClick={() => toggleUpload()} name="Dodaj zdjęcie"/>
                         <Link path="./login" name="Logowanie"/>
+                        <Link path="./logout" name="Wyloguj"/>
                         {/*
                         <Link path={"./two"} name={"Two"}/>
                         <Link path={"./three"} name={"Three"}/> */}

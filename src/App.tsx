@@ -6,6 +6,7 @@ import './App.css';
 import Navbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import LogoutPage from "./pages/LogoutPage";
 
 export type ImageItem = {
     _id: string,
@@ -30,6 +31,7 @@ function App() {
                     {/* <Route path="product" element={<ProductList />} /> */}
                 <Route path="/upload" element={<ProductList />}/>
                 <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/logout" element={<LogoutPage/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
                 {/* jesli nie znajdzie adnej z powyzszych wywali 404 */}
                 <Route path="*" element={<div> nie ma strony</div>} />

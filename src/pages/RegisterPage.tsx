@@ -24,7 +24,7 @@ export default () => {
             alert('Pola nie są poprawnie wypełnione!');
             return;
         } else {
-            // TODO wysłanie żądania metodą POST na serwer fetch(url)
+           
             const data: RegisterModel = {
                 name: username,
                 email: email,
@@ -50,7 +50,7 @@ export default () => {
 
     return (
         <div className="text-red-950 dark:text-white p-8">
-            <h2 className="mb-4">Rejestracja</h2>
+            <p className="mb-4 text-2xl">Rejestracja</p>
             {/* tu na dole bedzie funkcja która nam się odpali gdy wprowadzimy dane */}
             <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
                 <label htmlFor="username">Nazwa użytkownika</label>
