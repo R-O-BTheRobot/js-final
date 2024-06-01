@@ -8,11 +8,16 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")({
+      strategy: 'class',
+    }),
+  ],
   variants: {
     extend: {
       display: ['dark']
     }
   }
 }
+
 

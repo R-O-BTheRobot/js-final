@@ -1,66 +1,30 @@
-//import { useState } from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
-import Navbar from './components/Navbar';
-import './App.css'
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import ProductList from './pages/ProductList';
+import ProductDetails from './pages/ProductDetails';
+//import Layout from './components/Layout';
+import './App.css';
+import Navbar from "./components/Navbar.tsx";
+import Error from "./components/Error.tsx";
 
 function App() {
-    //const [count, setCount] = useState(0)
     document.body.classList.add('bg-gray-100', 'dark:bg-slate-700');
-
     return (
-        <>
-            <Navbar/>
-            <div className='flex justify-center'>
-                <div className="relative grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 max-w-screen-xl gap-4 p-2">
-                    <div>
-                        <img className="h-auto max-w-full rounded-lg"
-                             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt=""/>
-                    </div>
-                    <div>
-                        <img className="h-auto max-w-full rounded-lg"
-                             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt=""/>
-                    </div>
-                    <div>
-                        <img className="h-auto max-w-full rounded-lg"
-                             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt=""/>
-                    </div>
-                    <div>
-                        <img className="h-auto max-w-full rounded-lg"
-                             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt=""/>
-                    </div>
-                    <div>
-                        <img className="h-auto max-w-full rounded-lg"
-                             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" alt=""/>
-                    </div>
-                    <div>
-                        <img className="h-auto max-w-full rounded-lg"
-                             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" alt=""/>
-                    </div>
-                    <div>
-                        <img className="h-auto max-w-full rounded-lg"
-                             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-6.jpg" alt=""/>
-                    </div>
-                    <div>
-                        <img className="h-auto max-w-full rounded-lg"
-                             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-7.jpg" alt=""/>
-                    </div>
-                    <div>
-                        <img className="h-auto max-w-full rounded-lg"
-                             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-8.jpg" alt=""/>
-                    </div>
-                    <div>
-                        <img className="h-auto max-w-full rounded-lg"
-                             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-9.jpg" alt=""/>
-                    </div>
-                    <div>
-                        <img className="h-auto max-w-full rounded-lg"
-                             src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-10.jpg" alt=""/>
-                    </div>
-                </div>
-            </div>
-        </>
-    )
+        <BrowserRouter>
+            <Navbar />
+            <Routes>
+                {/* to na dole to jest layout*/}
+                <Route path="/" element={<ProductList />}/>
+                {/* :id - nawa parametru, przechwyytujemy przy pomocy useParams() */}
+                {<Route path="/image/:id" element={<ProductDetails />} />/*  */}
+                    {/* na dole jest nasza strona główna. Nasz indeks */}
+                    {/* <Route path="product" element={<ProductList />} /> */}
+                <Route path="/upload" element={<ProductList />}/>
+                {/* jesli nie znajdzie adnej z powyzszych wywali 404 */}
+                <Route path="/error/:msg" element={<Error/>} />
+                <Route path="*" element={<Error errorMsg={"Nie ma takiej strony"}/>} />
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
-export default App
+export default App;
