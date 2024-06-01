@@ -3,9 +3,11 @@ import ProductList from './pages/ProductList';
 import ProductDetails from './pages/ProductDetails';
 //import Layout from './components/Layout';
 import './App.css';
-import Navbar from "./components/Navbar.tsx";
+import Navbar from "./components/Navbar";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
-interface IImage {
+export type ImageItem = {
     _id: string,
     userId: string,
     title: string,
@@ -27,6 +29,8 @@ function App() {
                     {/* na dole jest nasza strona główna. Nasz indeks */}
                     {/* <Route path="product" element={<ProductList />} /> */}
                 <Route path="/upload" element={<ProductList />}/>
+                <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/register" element={<RegisterPage/>}/>
                 {/* jesli nie znajdzie adnej z powyzszych wywali 404 */}
                 <Route path="*" element={<div> nie ma strony</div>} />
             </Routes>

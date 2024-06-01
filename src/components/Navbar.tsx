@@ -1,12 +1,12 @@
-import Link from "./Link";
-import { useLocalStorage } from "@uidotdev/usehooks";
-import { useEffect, useState} from "react";
-import PopupBtn from "./PopupBtn.tsx";
-import Popup from "./Popup.tsx";
-import UploadPopup from "./UploadPopup.tsx";
+import Link from './Link';
+import { useLocalStorage } from '@uidotdev/usehooks';
+import { useEffect, useState} from 'react';
+import PopupButton from './PopupButton';
+import Popup from './Popup';
+import UploadPopup from './UploadPopup';
 
 export default function Navbar() {
-    const [darkMode, saveDarkMode] = useLocalStorage("isDarkModeEnabled", false);//domyślnie bedzie wyłączony tryb gdy wchodzimy pierwszy raz na stronę
+    const [darkMode, saveDarkMode] = useLocalStorage('isDarkModeEnabled', false);//domyślnie bedzie wyłączony tryb gdy wchodzimy pierwszy raz na stronę
     const [popupState, setPopupState] = useState({ open: false });
 
     useEffect(() => {
@@ -21,8 +21,8 @@ export default function Navbar() {
     const toggleDark = () => {
         saveDarkMode(!darkMode);
     }
-    function toggleUpload() {
-        return () => setPopupState({ open: !popupState.open });
+    const toggleUpload = () => {
+        setPopupState({ open: !popupState.open });
     }
 
     return (
@@ -49,16 +49,16 @@ export default function Navbar() {
                                     d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/>
                             </svg>
                         </button>
-                        <PopupBtn onClick={toggleUpload()} name={"Dodaj zdjęcie"}/>
-                        <Link path={"./login"} name={"Logowanie"}/>
+                        <PopupButton onClick={() => toggleUpload()} name="Dodaj zdjęcie"/>
+                        <Link path="./login" name="Logowanie"/>
                         {/*
                         <Link path={"./two"} name={"Two"}/>
                         <Link path={"./three"} name={"Three"}/> */}
                     </div>
                 </div>
             </nav>
-            <Popup popupState={popupState} onClick={toggleUpload()}>
-                <UploadPopup onClick={toggleUpload()}/>
+            <Popup state={popupState} onClick={() => toggleUpload()}>
+                <UploadPopup onClick={() => toggleUpload()}/>
             </Popup>
         </>
     )
