@@ -3,8 +3,23 @@ import ProductList from './pages/ProductList';
 import ProductDetails from './pages/ProductDetails';
 //import Layout from './components/Layout';
 import './App.css';
+
+import  maciejNavbar from "./components/Navbar";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import LogoutPage from "./pages/LogoutPage";
+
+export type ImageItem = {
+    _id: string,
+    userId: string,
+    title: string,
+    imageBase64: string,
+    description: string|undefined
+}
+
 import Navbar from "./components/Navbar.tsx";
 import Error from "./components/Error.tsx";
+
 
 function App() {
     document.body.classList.add('bg-gray-100', 'dark:bg-slate-700');
@@ -19,6 +34,9 @@ function App() {
                     {/* na dole jest nasza strona główna. Nasz indeks */}
                     {/* <Route path="product" element={<ProductList />} /> */}
                 <Route path="/upload" element={<ProductList />}/>
+                <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/logout" element={<LogoutPage/>}/>
+                <Route path="/register" element={<RegisterPage/>}/>
                 {/* jesli nie znajdzie adnej z powyzszych wywali 404 */}
                 <Route path="/error/:msg" element={<Error/>} />
                 <Route path="*" element={<Error errorMsg={"Nie ma takiej strony"}/>} />

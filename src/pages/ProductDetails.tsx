@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
+
+import { useParams } from "react-router-dom";
+import ImageThumb from "../components/ImageThumb";
+import { ImageItem } from '../App';
+
 import {useNavigate, useParams} from "react-router-dom";
 import ImageFull from "../components/ImageFull";
 
-export default function ProductDetails()  {
+
+export default () => {
     const { id } = useParams();
+
 
     const navigate = useNavigate();
 
@@ -24,6 +31,7 @@ export default function ProductDetails()  {
             console.debug(image);
             fetch('http://localhost:3000/api/image/' + id)
                 .then(res => res.json())
+
                 .then((res) => {
                     if(!res.errorResponse){
                         setImage(res); //zapisujemy w zmiennej image. Zwróci tablice tylko z image z backend
@@ -42,6 +50,7 @@ export default function ProductDetails()  {
                 });
         }
 
+
     }, [id]);//jakie wartości będą nasłuchiwane
     if(!image) {
         navigate("/error/"+"Nie możemy znaleźć twojego obrazka");
@@ -59,6 +68,7 @@ export default function ProductDetails()  {
 
         </div>
     )
+
 
     
 }
