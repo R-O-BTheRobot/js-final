@@ -1,3 +1,4 @@
+
 import { ReactNode } from 'react';
 
 type PopupState = {
@@ -22,4 +23,6 @@ export default function Popup({children, state, onClick}: PopupProps) {
             </div>
         </>
     );
+
+
 }

@@ -3,7 +3,8 @@ import ProductList from './pages/ProductList';
 import ProductDetails from './pages/ProductDetails';
 //import Layout from './components/Layout';
 import './App.css';
-import Navbar from "./components/Navbar";
+
+import  maciejNavbar from "./components/Navbar";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import LogoutPage from "./pages/LogoutPage";
@@ -16,8 +17,11 @@ export type ImageItem = {
     description: string|undefined
 }
 
+import Navbar from "./components/Navbar.tsx";
+import Error from "./components/Error.tsx";
+
+
 function App() {
-    //const [count, setCount] = useState(0)
     document.body.classList.add('bg-gray-100', 'dark:bg-slate-700');
     return (
         <BrowserRouter>
@@ -34,7 +38,8 @@ function App() {
                 <Route path="/logout" element={<LogoutPage/>}/>
                 <Route path="/register" element={<RegisterPage/>}/>
                 {/* jesli nie znajdzie adnej z powyzszych wywali 404 */}
-                <Route path="*" element={<div> nie ma strony</div>} />
+                <Route path="/error/:msg" element={<Error/>} />
+                <Route path="*" element={<Error errorMsg={"Nie ma takiej strony"}/>} />
             </Routes>
         </BrowserRouter>
     );

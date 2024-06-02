@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import ImageThumb from "../components/ImageThumb.tsx";
 
 export default function ProductList() {
-    //logika nizej
+    interface IImage {
+        id: string,
+        userId: string,
+        title: string,
+        imageBase64: string,
+        description: string|undefined
+    }
 
     const [images, setImages] = useState<any>(); //getter and setter / pobieram i ustawiem
     //wykonywany gdy ten komponent (ten plik na którym jesteśmy) zostanie wyswietlony na strony czyli zainicjalizowany lub zmieni się jakaś wartość w useState i use Effect to są Hooki()
@@ -12,8 +18,10 @@ export default function ProductList() {
                 .then(res => res.json())
 
                 .then((res) => {
-                    console.log(res)
+
+                    console.debug(res)
                     setImages(res); //zapisujemy w zmiennej images. Zwróci tablice tylko z product z backend
+
 
                 });
         }
@@ -25,16 +33,17 @@ export default function ProductList() {
                 {
                     images?.map((product: any) =>
                         // Opakowujemy komponent Image tagiem <a>, aby stał się linkiem i w adresie url doklejał ID produktu. Cała strona zostanie przładowana
-                        <a href={'/image/' + product._id}>
+                        <a href={'/image/' + product.id} key={product.id}>
                             <ImageThumb
-                                key={product._id}
                                 imageSrc={product.imageBase64}
                                 imageAlt={product.title}
                             />
                         </a>
                     )
                 }
+
                 {console.log(images)}
+
                 </div>
             </div>
        

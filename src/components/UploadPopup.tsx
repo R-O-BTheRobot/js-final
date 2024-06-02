@@ -1,5 +1,5 @@
 /* import Image from "./ImageThumb.tsx"; */
-import {useState} from "react";
+import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 export default function UploadPopup({onClick}: {onClick:()=>void}) {
@@ -19,28 +19,29 @@ export default function UploadPopup({onClick}: {onClick:()=>void}) {
             // on reader load somthing...
             reader.onload = () => {
                 // Make a fileInfo Object
-                console.log("Called", reader);
+                console.debug("Called", reader);
                 baseURL = reader.result;
-                console.log(baseURL);
+                console.debug(baseURL);
                 resolve(baseURL);
             };
         });
     };
 
-    const handleFileInputChange = (e: FileList|undefined) => {
-        console.log(e.target.files[0]);
-
+    const handleFileInputChange = (e: FileList) => {
+        // @ts-expect-error files work fine
+        console.debug(e.target.files[0]);
+        // @ts-expect-error files work fine
         const file = e.target.files[0];
 
         getBase64(file)
             .then(result => {
                 file["base64"] = result;
-                console.log("File Is", file);
+                console.debug("File Is", file);
                 (document.querySelector('#imageBase64') as HTMLInputElement).value = file["base64"];
                 toggleUploadDiv(!showUploadDiv);
             })
             .catch(err => {
-                console.log(err);
+                console.debug(err);
             });
     };
 
@@ -68,16 +69,18 @@ export default function UploadPopup({onClick}: {onClick:()=>void}) {
         </div>;
     }
 
-    function handleSubmit(event){
+    function handleSubmit(event:FormEvent){
         event.preventDefault();
+        const id = Date.now()
         const imageBase64 = (document.querySelector('#imageBase64') as HTMLInputElement).value;
         const userId = (document.querySelector('#userId') as HTMLInputElement).value;
         const description = (document.querySelector('#description') as HTMLInputElement).value;
         const title = (document.querySelector('#title') as HTMLInputElement).value;
         fetch('http://localhost:3000/api/upload', {
-            method: 'post',
+            method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
+                "id": id,
                 "imageBase64": imageBase64,
                 "userId": userId,
                 "description": description,
@@ -85,11 +88,24 @@ export default function UploadPopup({onClick}: {onClick:()=>void}) {
             })
         })
             .then(response => response.json())
-            .then((id) => {
-                console.log(id);
+            .then((res) => {
                 toggleUploadDiv(true);
                 onClick();
-                navigate("/image/"+id, );
+                if(!res.errorResponse){
+                    console.debug(res);
+                    navigate("/image/"+res, );
+                }
+                else{
+                    console.log('Wystąpił błąd!');
+                    console.error(res);
+                    navigate("/error/"+res.errorResponse.errorMessage);
+                }
+            }).catch((res)=>{
+                console.log('Wystąpił błąd!');
+                console.error(res);
+                toggleUploadDiv(true);
+                onClick();
+                navigate("/error/"+"Błąd serwera");
             });
     }
 
